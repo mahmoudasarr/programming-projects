@@ -1,13 +1,13 @@
 #include <iostream>
 
-// Variables
-double password = 123456;
-double balance = 5000;
+// Global variables
+double password = 123456; // stored password
+double balance = 5000;    // account balance
 int deposit = 0;
 int withdraw = 0;
 int choise = 0;
 
-// Display the menu of ATM.
+// Shows the ATM menu
 void showMenu()
 {
     std::cout << "***Welcome to Bank ATM***" << '\n';
@@ -15,13 +15,12 @@ void showMenu()
     std::cout << "1. Show Balance" << '\n';
     std::cout << "2. Deposit" << '\n';
     std::cout << "3. Withdraw" << '\n';
-    // std::cout << "4. Change Password" << '\n';
     std::cout << "4. Exit" << '\n';
 }
 
+// Checks password and runs the selected option
 void process()
 {
-
     if (password == 123456)
     {
         std::cout << "Enter your choise: ";
@@ -30,10 +29,12 @@ void process()
         switch (choise)
         {
         case 1:
+            // show balance
             std::cout << "You'r balance is: " << balance << '\n';
             break;
 
         case 2:
+            // deposit, max 10000 per day
             std::cout << "Enter the amount" << '\n';
             std::cin >> deposit;
             if (deposit <= 10000)
@@ -48,6 +49,7 @@ void process()
             break;
 
         case 3:
+            // withdraw, can't exceed balance
             std::cout << "Enter the amount: " << '\n';
             std::cin >> withdraw;
             if (withdraw <= balance)
@@ -72,6 +74,7 @@ void process()
     }
     else
     {
+        // wrong password, force exit
         std::cout << "Wrong password!, try again." << '\n';
         choise = 4;
     }
@@ -80,8 +83,11 @@ void process()
 int main()
 {
     showMenu();
+
     std::cout << "Enter your password: " << '\n';
     std::cin >> password;
+
+    // keep showing menu until user exits
     do
     {
         process();
