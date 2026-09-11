@@ -1,11 +1,12 @@
 #include <iostream>
 
 // Global variables
-double password = 123456; // stored password
-double balance = 5000;    // account balance
+double PIN = 123456;   // stored PIN
+double balance = 5000; // account balance
 int deposit = 0;
 int withdraw = 0;
 int choise = 0;
+int newPIN = 0;
 
 // Shows the ATM menu
 void showMenu()
@@ -15,15 +16,16 @@ void showMenu()
     std::cout << "1. Show Balance" << '\n';
     std::cout << "2. Deposit" << '\n';
     std::cout << "3. Withdraw" << '\n';
-    std::cout << "4. Exit" << '\n';
+    std::cout << "4. Change PIN" << '\n';
+    std::cout << "5. Exit" << '\n';
 }
 
-// Checks password and runs the selected option
+// Checks PIN and runs the selected option
 void process()
 {
-    if (password == 123456)
+    if (PIN == 123456)
     {
-        std::cout << "Enter your choise: ";
+        std::cout << "Enter you'r choise: ";
         std::cin >> choise;
 
         switch (choise)
@@ -50,7 +52,7 @@ void process()
 
         case 3:
             // withdraw, can't exceed balance
-            std::cout << "Enter the amount: " << '\n';
+            std::cout << "Enter the : " << '\n';
             std::cin >> withdraw;
             if (withdraw <= balance)
             {
@@ -64,19 +66,36 @@ void process()
             break;
 
         case 4:
+        {
+            std::cout << "Enter the new PIN with 6 numbers: " << '\n';
+            std::cin >> newPIN;
+
+            if (newPIN >= 100000 && newPIN <= 999999)
+            {
+                PIN = newPIN;
+                std::cout << "PIN changed successfully." << '\n';
+            }
+            else
+            {
+                std::cout << "Invalid PIN! Must be exactly 6 digits." << '\n';
+            }
+            break;
+        }
+
+        case 5:
             std::cout << "Thank you" << '\n';
             break;
 
         default:
-            std::cout << "Invalid choice, try again.";
+            std::cout << "Invalid choice, try again." << '\n';
             break;
         }
     }
     else
     {
-        // wrong password, force exit
-        std::cout << "Wrong password!, try again." << '\n';
-        choise = 4;
+        // wrong PIN, force exit
+        std::cout << "Wrong PIN!, try again." << '\n';
+        choise = 5;
     }
 }
 
@@ -84,14 +103,14 @@ int main()
 {
     showMenu();
 
-    std::cout << "Enter your password: " << '\n';
-    std::cin >> password;
+    std::cout << "Enter your PIN: ";
+    std::cin >> PIN;
 
     // keep showing menu until user exits
     do
     {
         process();
-    } while (choise != 4);
+    } while (choise != 5);
 
     return 0;
 }
