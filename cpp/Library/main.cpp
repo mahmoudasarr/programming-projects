@@ -40,7 +40,8 @@ void librarianMenu()
 {
     int choice = 0;
     std::cout << "1. Add book\n";
-    std::cout << "2. Delete book\n";
+    std::cout << "2. Display avalible copies\n";
+    std::cout << "3. Delete book\n";
     std::cin >> choice;
 
     switch (choice)
@@ -67,6 +68,24 @@ void librarianMenu()
     }
     case 2:
     {
+        if (library.empty())
+        {
+            std::cout << "No books to display.\n";
+        }
+        else
+        {
+            for (int i = 0; i < library.size(); i++)
+            {
+                std::cout << "Title: " << library[i].title << '\n';
+                std::cout << "Author: " << library[i].author << '\n';
+                std::cout << "ISBN: " << library[i].isbn << '\n';
+                std::cout << "Available copies: " << library[i].availableCopies << " / " << library[i].totalCopies << '\n';
+            }
+        }
+        break;
+    }
+    case 3:
+    {
         std::string isbnToDelete;
         std::cout << "Enter the ISBN of the book to delete: ";
         std::cin >> isbnToDelete;
@@ -79,7 +98,23 @@ void librarianMenu()
     }
 }
 
-void memberMenu() {}
+void memberMenu()
+{
+    if (library.empty())
+    {
+        std::cout << "No books to display.\n";
+    }
+    else
+    {
+        for (int i = 0; i < library.size(); i++)
+        {
+            std::cout << "Title: " << library[i].title << '\n';
+            std::cout << "Author: " << library[i].author << '\n';
+            std::cout << "ISBN: " << library[i].isbn << '\n';
+            std::cout << "Available copies: " << library[i].availableCopies << " / " << library[i].totalCopies << '\n';
+        }
+    }
+}
 
 void login()
 {
